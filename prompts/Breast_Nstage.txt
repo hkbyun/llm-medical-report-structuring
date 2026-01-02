@@ -1,0 +1,53 @@
+### **Task**
+You are a breast pathologist. Your task is to classify the tumor's Nstage based on the provided pathologic report. 
+
+### **Expected Output Format**
+The extracted information should be presented as a JSON object in the following format:
+
+```json
+{“Nstage”: “<string>”, “reason”: “<string>”}
+```
+
+### **Instructions** 
+Think step by step. Classify the tumor into a Nstage based on the following criteria:
+
+- pNX: Regional lymph nodes cannot be assessed (e.g., not removed for pathological study or previously removed).
+- pN0: No regional lymph node metastasis identified. (ITCs must also be abscent)
+- pN0(i+): Isolated tumor cells (ITCs) only (malignant cell clusters no larger than 0.2 mm) in regional lymph node(s).
+- pN1mi: Micrometastases (larger than 0.2 mm, but none larger than 2.0 mm).
+- pN1a: Metastases in 1–3 axillary lymph nodes, at least one metastasis larger than 2.0 mm.
+- pN1b: Metastases in ipsilateral internal mammary sentinel nodes, excluding ITCs.
+- pN1c: pN1a and pN1b combined.
+- pN2a: Metastases in 4–9 axillary lymph nodes (at least one tumor deposit larger than 2.0 mm).
+- pN2b: Metastases in clinically detected internal mammary lymph nodes with or without microscopic confirmation; with pathologically negative axillary nodes.
+- pN3a: Metastases in 10 or more axillary lymph nodes (at least one tumor deposit larger than 2.0 mm); or metastases to the infraclavicular (Level III axillary lymph) nodes.
+- pN3b: Either of the following conditions must be met:
+    1.Positive ipsilateral internal mammary lymph nodes by imaging in the presence of one or more positive Level I or II axillary lymph nodes.
+    2. Metastases in more than three axillary lymph nodes AND in ipsilateral internal mammary sentinel nodes.
+- pN3c: Metastases in ipsilateral supraclavicular lymph nodes.
+
+### **Handling Missing or Ambiguous Data:**
+- If Nstage cannot be determined due to missing or ambiguous data, set Nstage to "Insufficient".
+
+###  **Handling number of lymph nodes:**
+Lymph node counts are reported in the format **(X/Y)**, where:
+- **X = Positive lymph nodes**
+- **Y = Total examined lymph nodes**
+
+**Rules to Prevent Overcounting:**
+1. **If a "Total (X/Y)" is provided for all lymph nodes, use this value directly.**  
+   - Do **not** sum individual sections when a total is explicitly stated.
+2. **If no total is provided, sum the individual lymph node counts manually.**  
+3. **Sentinel lymph node totals apply only to sentinel nodes** and should not be assumed as the total for all lymph nodes.
+   
+### **Rules:**
+- Use only the data provided in the pathology report. Do not infer or assume information beyond the provided text.
+- Lymph node size and count should be used for staging. Ignore primary tumor size.
+- After determining the total number of positive axillary lymph nodes, match it to the correct pN stage criteria.
+
+----
+
+**Pathology report for analysis:**
+{Results}
+
+----

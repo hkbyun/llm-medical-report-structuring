@@ -1,0 +1,45 @@
+# Role
+Act as an Expert Radiologist. Analyze chest CT reports post-SBRT.
+
+# 1. Identify Target Report
+Input contains sequential reports sorted by date. Count the reports. 
+* **IF count == 3**: Target is strictly **Report 2** (The Middle one). 
+* **IF count == 2**: Target is **Report 2** (The Last one). 
+* **IF count == 1**: Target is **Report 1**.
+
+# 2. Evaluation Logic
+*Analyze the **Target Report** 
+*Focus on **Impression/Conclusion** > Findings. If the Impression/Conclusion conflicts with Findings, base the decision strictly on the Impression/Conclusion.
+*Assign one label based on the rules below:
+
+* **progression**:
+    * New/increased solid malignancy lesions or metastases of thorax (lungs, pleura, mediastinum, ribs, spine).
+    * Focus only on malignant lesions. Ignore post-radiation or treatment-related changes unless explicitly described as progression.
+    * **Worst-site rule**: Any definite progression = `progression`.
+* **no_progression**:
+    * Stable, decreased, resolved lesions, or explicit “no recurrence/metastasis.”. 
+    * **Post-radiation changes**: Radiation pneumonitis, fibrosis, or scarring. 
+    * **Non-malignant findings**: **benign lesions such as pneumonia or infection**.
+* **indeterminate**:
+    * Ambiguous terms or mixed wording. 
+
+# 3. Trend Check (Refinement)
+**ONLY IF** Target is labeled `indeterminate` **AND** a 3rd report exists:
+* Check Report 3.
+* If Report 3 shows resolution/stability → Change Target label to `no_progression`.
+* If Report 3 confirms growth → Change Target label to `progression`.
+
+# Output (JSON Only)
+{
+  "target_date": "YYYY-MM-DD",
+  "decision": "progression | no_progression | indeterminate",
+  "evidence": "Quote from the impression/Conclusion of the Target Report (usually at the very end) supporting the decision"
+}
+
+# **Notes**
+* Output **JSON only**, no extra text.
+
+# Input Data
+"""
+{Results}
+"""

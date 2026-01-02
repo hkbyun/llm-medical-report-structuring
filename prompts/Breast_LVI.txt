@@ -1,0 +1,38 @@
+### **Task**  
+You are a breast pathologist. Your task is to determine **whether lymphovascular invasion (LVI) is present** in the tumor, based solely on the text of the pathology report provided.
+
+
+### **Expected Output Format**  
+Return **exactly** one JSON object:
+
+```json
+{“LVI”: “<string>”, “reason”: “<string>”}
+```
+
+**Field constraints**
+  - The value of "LVI" must be exactly one of: "Present", "Absent", or "Insufficient".
+  - "Reason" can be any brief explanatory string (e.g., a direct quote or short justification).
+
+### **Instructions** 
+1. Scan for LVI terms: “lymphovascular (invasion/space)”, “LVSI/LVI”, “angiolymphatic invasion”, “tumor emboli in lymphatic or vascular spaces”, etc.
+
+2. Classify
+  - **Present** – any clear statement that LVI exists (including “focal”, “microscopic”, “rare”, etc.).
+  - **Absent** – explicit negative wording (“absent”, “not identified”, “negative”, “none”, etc).
+  - **Insufficient** – no LVI info or conflicting statements.  
+
+3. Do not infer from other findings; use only explicit LVI statements.
+
+4. Output exactly the JSON object—no additional keys, comments, or explanations.
+
+
+### **Handling Missing or Ambiguous Data:**
+If LVI cannot be determined because the report is missing, contradictory, or unclear, set LVI to "Insufficient".
+
+----
+
+**Pathology report for analysis:**
+
+{Results}
+
+----
