@@ -5,6 +5,12 @@ __pycache__/
 .venv/
 venv/
 
+# IDE
+.idea/
+
+# R
+.Rhistory
+
 # OS
 .DS_Store
 Thumbs.db
