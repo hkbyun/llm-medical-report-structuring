@@ -1,4 +1,5 @@
-[Figure1.tif](https://github.com/user-attachments/files/24823864/Figure1.tif)
+
+<img width="3781" height="3193" alt="Figure1" src="https://github.com/user-attachments/assets/512e0fd4-9629-457e-b443-6bc30f7af767" />
 
 # LLM Extraction Pipelines (OpenAI / Gemini / Local)
 
