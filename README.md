@@ -1,3 +1,5 @@
+[Figure1.tif](https://github.com/user-attachments/files/24823864/Figure1.tif)
+
 # LLM Extraction Pipelines (OpenAI / Gemini / Local)
 
 Minimal scripts to run **LLM extraction → (optional) JSON correction → Excel output**.
